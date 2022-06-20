@@ -1,0 +1,105 @@
+<script type="text/javascript">
+    function check()
+    {
+        if (document.getElementById("NgayLap").value  == "")
+        {
+            document.getElementById("message").innerHTML = "<i><b style='color:red'>Nhập ngày cập nhật mới thông tin!</b></i>";
+            return false;
+        }
+
+        if (document.getElementById("TongTien").value  == "")
+        {
+            document.getElementById("message").innerHTML = "<i><b style='color:red'>Nhập tổng tiền!</b></i>";
+            return false;
+        }
+
+        if (document.getElementById("TrangThai").value  == "")
+        {
+            document.getElementById("message").innerHTML = "<i><b style='color:red'>Nhập trạng thái đơn!</b></i>";
+            return false;
+        }
+
+        if (document.getElementById("MaKH").value  == "")
+        {
+            document.getElementById("message").innerHTML = "<i><b style='color:red'>Nhập Mã KH!</b></i>";
+            return false;
+        }
+
+        if (document.getElementById("HinhThuc").value  == "")
+        {
+            document.getElementById("message").innerHTML = "<i><b style='color:red'>Nhập hình thức thanh toán!</b></i>";
+            return false;
+        }
+
+        if (document.getElementById("MaShipper").value  == "")
+        {
+            document.getElementById("message").innerHTML = "<i><b style='color:red'>Chọn tài khoản Shipper!</b></i>";
+            return false;
+        }
+
+        return true;
+    }
+</script>
+
+<h1>CẬP NHẬT ĐƠN HÀNG: <?php echo $DH->MaDH; ?></h1>
+<hr/>
+
+ <form method ="POST" onsubmit="return check();">
+ 	<input type="hidden" name="action" value="updateDH" />
+    <table>
+        <tr>
+            <td>Mã DH </td>
+            <td><input id="MaDH" name="MaDH" type="text" value="<?php echo $DH->MaDH; ?>" disabled/></td>
+        </tr>
+        <tr>
+            <td>Ngày lập</td>
+            <td><input id="Ngaylap" name="NgayLap" type="date" value="<?php echo $DH->NgayLap; ?>" 
+            style="width:270px; height:30px;" readonly="readonly"/></td>
+        </tr>
+        <tr>
+            <td>Tổng tiền </td>
+            <td><input id="TongTien" name="TongTien" type="text" value="<?php echo $DH->TongTien; ?>" readonly="readonly" /></td>
+        </tr>
+        <tr>
+            <td>Trạng thái</td>
+            <td>
+                <select name="TrangThai" class="trangThai" id="trangThai" readonly="readonly">
+                    <option  value='<?php echo  $DH->TrangThai; ?>' > <?php echo  $DH->TrangThai; ?></option>
+                    <option value='Chờ duyệt'> Chờ duyệt</option>
+                    <option value='Đang đóng gói'> Đang đóng gói</option>
+                    <option value='Đang giao'> Đang giao</option>
+                    <option value='Đã giao'> Đã giao</option>
+                    <option value='Đã hủy'> Đã hủy</option>
+                </select>
+            </td>                
+        </tr>
+        <tr>
+            <td>MaKH</td>
+            <td><input id="MaKH" name="MaKH" type="text" value="<?php echo $DH->MaKH; ?>" readonly="readonly"/></td>
+        </tr>
+        <tr>
+            <td>Hình Thức thanh toán</td>
+            <td>
+                <select name="HinhThuc" class="HinhThuc" id="HinhThuc" >
+                    <option value='<?php echo $DH->HinhThucThanhToan; ?>'><?php echo $DH->HinhThucThanhToan; ?></option>
+                    <option value='Tiền mặt'> Tiền mặt</option>
+                    <option value='Chuyển khoản'> Chuyển khoản</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>MaShipper</td>
+            <td><input id="Email" name="MaShipper" type="text" value="<?php echo $DH->MaShipper; ?>" readonly="readonly"/></td>
+        </tr>
+    </table>
+    <input type="submit" value="updateDH" style="width: 200px; margin-left:250px; margin-top:20px;"/> 
+    <br/><br/>
+    <span id="message"> </span>
+</form>
+
+<script>
+    window.onload = function(){
+        document.getElementById("MaDH").value = <?php echo $DVVC->MaDH ?>;
+    }
+</script>
+    

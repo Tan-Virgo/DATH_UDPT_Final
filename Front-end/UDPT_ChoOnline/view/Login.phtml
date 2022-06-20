@@ -1,0 +1,30 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<h3>Đăng nhập</h3>
+
+<form method ="post">
+ 	<input type="hidden" name="action" value="login" />
+    <table>
+        <tr>
+            <td>Username</td>
+            <td>
+                <input name="UserName" type="text" value=""/>
+            </td>
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td>
+                <input style="width:275px; height:30px" name="Password" type="password" value=""/>
+            </td>                   
+        </tr>
+    </table>
+    <input type="submit" value="login" style="width: 150px;"/>
+    <?php
+
+
+        if (isset ($_SESSION["IsLogined"]) && $_SESSION["IsLogined"] == True)
+        {				
+            $name = $_SESSION["name"];
+            echo "Logined user: $name <a href=\"?action=logout\"> sign out </a>";
+        }
+    ?>
+</form>

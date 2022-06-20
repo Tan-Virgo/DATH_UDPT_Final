@@ -1,0 +1,126 @@
+<script type="text/javascript">
+    function check()
+    {
+        if (document.getElementById("TenShipper").value  == "")
+        {
+            document.getElementById("message").innerHTML = "<i><b style='color:red'>Nhập tên nhà cung ứng sản phẩm!</b></i>";
+            return false;
+        }
+
+        if (document.getElementById("GioiTinh").value  == "")
+        {
+            document.getElementById("message").innerHTML = "<i><b style='color:red'>Chọn giới tính!</b></i>";
+            return false;
+        }
+
+        if (document.getElementById("SDT").value  == "")
+        {
+            document.getElementById("message").innerHTML = "<i><b style='color:red'>Nhập SĐT!</b></i>";
+            return false;
+        }
+
+        if (document.getElementById("Email").value  == "")
+        {
+            document.getElementById("message").innerHTML = "<i><b style='color:red'>Nhập Email!</b></i>";
+            return false;
+        }
+
+        if (document.getElementById("CMND").value  == "")
+        {
+            document.getElementById("message").innerHTML = "<i><b style='color:red'>Nhập CMND!</b></i>";
+            return false;
+        }
+
+        if (document.getElementById("NgaySinh").value  == "")
+        {
+            document.getElementById("message").innerHTML = "<i><b style='color:red'>Nhập ngày sinh!</b></i>";
+            return false;
+        }
+
+        if (document.getElementById("MaDVVC").value  == "")
+        {
+            document.getElementById("message").innerHTML = "<i><b style='color:red'>Chọn Đơn vị vận chuyển!</b></i>";
+            return false;
+        }
+
+        if (document.getElementById("TaiKhoan").value  == "")
+        {
+            document.getElementById("message").innerHTML = "<i><b style='color:red'>Chọn tài khoản Login của bạn!</b></i>";
+            return false;
+        }
+
+        return true;
+    }
+</script>
+
+<h1>THÊM SHIPPER</h1>
+<hr/>
+
+ <form method ="POST" onsubmit="return check();">
+ 	<input type="hidden" name="action" value="addshipper" />
+    <table>
+        <tr>
+            <td>Tên Shipper </td>
+            <td><input id="TenShipper" name="tenShipper" type="text" value="" /></td>
+        </tr>
+        <tr>
+            <td>Giới tính</td>
+            <td><input id="GioiTinh" name="gioiTinh" type="text" value=""/></td>                   
+        </tr>
+        <tr>
+            <td>SĐT</td>
+            <td><input id="SDT" name="sdt" type="text" value=""/></td>
+        </tr>
+        <tr>
+            <td>Địa chỉ</td>
+            <td><input id="DiaChi" name="diaChi" type="text" value=""/></td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td><input id="Email" name="email" type="text" value=""/></td>
+        </tr>
+        <tr>
+            <td>CMND</td>
+            <td><input id="CMND" name="cmnd" type="text" value="" /></td>
+        </tr> 
+        <tr>
+            <td>Ngày sinh</td>
+            <td><input id="NgaySinh" name="ngaySinh" type="date" value="" 
+            style="width:270px; height:30px;"/></td>
+        </tr>  
+        <tr>
+            <td>Đơn vị vận chuyển</td>
+            <td>
+                <select name="maDVVC" class="maDVVC" id="MaDVVC">
+                    <?php
+                        foreach ($dsDVVC as $item)
+                        {
+                            ?>
+                                <option value='<?php echo $item->MaDVVC; ?>'>
+                                    <?php echo $item->TenDVVC; ?> 
+                                </option>
+                            <?php
+                        }
+                    ?>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Tài khoản</td>
+            <td><input id="TaiKhoan" name="taiKhoan" type="text" value="" /></td>
+        </tr>    
+        <tr>
+            <td>Xét duyệt</td>
+            <td>
+                <select name="xetDuyet" class="xetDuyet" id="xetDuyet">
+                    <option value='0'>Không duyệt</option>
+                    <option value='1'>Duyệt</option>
+                </select>
+            </td>
+        </tr>            
+    </table>
+    <input type="submit" value="addshipper" style="width: 200px; margin-left:220px; margin-top:20px;"/> 
+    <br/><br/>
+    <span id="message"> </span>
+</form>
+    

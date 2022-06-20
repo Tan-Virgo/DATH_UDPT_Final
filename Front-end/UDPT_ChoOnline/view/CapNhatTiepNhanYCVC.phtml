@@ -1,0 +1,82 @@
+<h1>TIẾP NHẬN ĐƠN HÀNG: <?php echo $order->MaDH; ?></h1>
+<hr/>
+
+ <form method ="POST" onsubmit="return check();">
+ 	<input type="hidden" name="action" value="updateconfirmorder" />
+    <table>
+        <tr>
+            <td>Mã đơn hàng </td>
+            <td><input id="MaDH" name="maDH" style="color:#808080" type="text" value="<?php echo $order->MaDH; ?>" readonly="readonly"/></td>
+        </tr>
+        <tr>
+            <td>Ngày lập </td>
+            <td><input id="NgayLap" name="ngayLap" style="color:#808080" type="text" value="<?php echo $order->NgayLap; ?>" readonly="readonly"/></td>
+        </tr>
+        <tr>
+            <td>Tổng tiền</td>
+            <td><input id="TongTien" name="tongTien" style="color:#808080" type="text" value="<?php echo $order->TongTien; ?>" readonly="readonly"/></td>                   
+        </tr>
+        <tr>
+        <!-- <td>Trạng thái</td>
+            <td>
+                <select id="trangThai" name="trangThai" value="<?php echo $order->TrangThai; ?>">
+                    <option value="Đã tiếp nhận"> Đã tiếp nhận</option>
+                    <option value="Đang giao"> Đang giao</option>
+                    <option value="Đã giao"> Đã giao</option>
+                    <option value="Đã hủy"> Đã hủy</option>    
+                </select>
+            </td>
+        </tr> -->
+        <tr>
+            <td>Trạng thái</td>
+            <td>
+                <select name="trangThai" class="trangThai" id="trangThai" >
+                    <option  value='<?php echo  $order->TrangThai; ?>' > <?php echo  $order->TrangThai; ?></option>
+                    <option value='Chờ duyệt'> Chờ duyệt</option>
+                    <option value='Đang đóng gói'> Đang đóng gói</option>
+                    <option value='Đang giao'> Đang giao</option>
+                    <option value='Đã giao'> Đã giao</option>
+                    <option value='Đã hủy'> Đã hủy</option>
+                </select>
+            </td>
+        </tr>     
+        <tr>
+            <td>Mã khách hàng</td>
+            <td><input id="MaKH" name="maKH" style="color:#808080" type="text" value="<?php  echo $order->MaKH; ?>" readonly="readonly"/></td>
+        </tr>
+        <tr>
+            <td>Hình thức thanh toán</td>
+            <td><input id="HinhThucThanhToan" name="hinhThucThanhToan" style="color:#808080" type="text" value="<?php echo $order->HinhThucThanhToan; ?>" readonly="readonly"/></td>
+        </tr>
+        <tr>
+            <td>Nhân viên giao hàng</td>
+            <td>
+                <select name="maShipper" class="maShipper" id="maShipper" >
+                                
+                    <?php
+                        if ($shipper->MaShipper)
+                        {
+                            ?>
+                                <option value=" <?php echo $shipper->MaShipper ?>" selected>
+                                    <?php echo $shipper->TenShipper; ?> 
+                                </option>
+                            <?php
+                        }
+
+                        foreach ($dsShipper as $item)
+                        {
+                            ?>
+                                <option value='<?php echo $item->MaShipper; ?>'>
+                                    <?php echo $item->TenShipper; ?> 
+                                </option>
+                            <?php
+                        }
+                    ?>
+                </select>
+            </td>
+        </tr>  
+    </table>
+    <input type="submit" value="Cập nhật" style="width: 200px; margin-left:250px; margin-top:20px;"/> 
+    <br/><br/>
+    <span id="message"> </span>
+</form>

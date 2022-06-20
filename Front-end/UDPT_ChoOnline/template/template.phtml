@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title id="title"> Chợ Online </title>
+        <?php require("include/meta.phtml"); ?>     
+    </head>
+    <body>
+        <div id="header"></div>
+        <div id="body">
+            <div id="topbar">
+                <div id="header-text"> <h1 style="margin-top:35px;"> ỨNG DỤNG MUA SẮM ONLINE </h1> </div>
+            </div>              
+            <div id="wrapper">   
+                <div id="smallbar"></div> 
+                <div id="content">    
+                    <!-- ------------------------------------ -->
+                    <!-- ------------------------------------ -->
+                    <!-- BEGIN: Nội dung chính của trang web  -->
+                    <div id="primary">                    
+                        <?php require($VIEW); ?>
+                    </div>
+                    <!-- END: Nội dung chính của trang web  -->
+                    <!-- ------------------------------------ -->
+                    <!-- ------------------------------------ -->
+                    <div id="secondary">
+                        <?php require("include/secondary.phtml"); ?>                    
+                    </div>
+                </div>    
+                <div id="smallbar"></div>        
+                <div id="footer">
+                    <image id="logo" src="./css/images/logo.png" />
+                    <div id="footer-text">
+                        <b> Copyright: Môn ỨNG DỤNG PHÂN TÁN - Nhóm 3 </b> <br/>
+                        GV hướng dẫn: Phạm Minh Tú
+                    </div>
+                </div>
+            </div>      
+        </div> 
+           
+    </body>
+</html>

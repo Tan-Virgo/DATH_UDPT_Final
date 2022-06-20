@@ -1,0 +1,5 @@
+{
+    "require": {
+        "tobscure/json-api": "^0.3.0"
+    }
+}

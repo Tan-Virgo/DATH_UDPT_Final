@@ -1,0 +1,101 @@
+<script type="text/javascript">
+   
+   function check()
+    {
+        if (document.getElementById("chitiet").value  == "")
+        {
+            document.getElementById("message").innerHTML = "<i><b style='color:red'>Nhập ngày cập nhật mới thông tin!</b></i>";
+            return false;
+        }
+
+        if (document.getElementById("ngaytao").value  == "")
+        {
+            document.getElementById("message").innerHTML = "<i><b style='color:red'>Nhập tổng tiền!</b></i>";
+            return false;
+        }
+
+        if (document.getElementById("nguoidung").value  == "")
+        {
+            document.getElementById("message").innerHTML = "<i><b style='color:red'>Nhập trạng thái đơn!</b></i>";
+            return false;
+        }
+
+        if (document.getElementById("sanpham").value  == "")
+        {
+            document.getElementById("message").innerHTML = "<i><b style='color:red'>Nhập Mã KH!</b></i>";
+            return false;
+        }
+
+        if (document.getElementById("nhacungcap").value  == "")
+        {
+            document.getElementById("message").innerHTML = "<i><b style='color:red'>Nhập hình thức thanh toán!</b></i>";
+            return false;
+        }
+        
+        return true;
+    }
+   
+
+</script>
+
+<h1>TẠO MỚI PHẢN HỒI </h1>
+<hr/>
+
+ <form method ="POST" onsubmit="return check();">
+ 	<input type="hidden" name="action" value="createphanhoi" />
+    <table>
+        <tr>
+            <td>Chi tiết</td>
+            <td><input id="chitiet" name="chitiet" type="text" value="" 
+            style="width:270px; height:60px;"/></td>
+        </tr>
+        <tr>
+            <td>Ngày tạo</td>
+            <td><input id="ngaytao" name="ngaytao" type="date" value="<?php $date = date('Y-m-d'); echo $date;?>"
+            style="width:270px; height:30px;" readonly="readonly"/></td>
+        </tr>
+        <tr>
+            <td>Khách hàng</td>
+            <td><input id="nguoidung" name="nguoidung" type="text" value="<?php echo $kh->MaKH?>" readonly="readonly"/></td>                   
+        </tr>
+        <tr>
+            <td>Sản phẩm</td>
+            <td>
+                <select name="sanpham" class="maSP" id="maSP">
+                    <?php
+                        foreach ($dsSP as $item)
+                        {
+                            ?>
+                                <option value='<?php echo $item->MaSP; ?>'>
+                                    <?php echo $item->TenSP; ?> 
+                                </option>
+                            <?php
+                        }
+                    ?>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Nhà cung cấp</td>
+            <td>
+                <select name="nhacungcap" class="maNCC" id="maNCC">
+                    <?php
+                        foreach ($dsNCC as $item)
+                        {
+                            ?>
+                                <option value='<?php echo $item->MaNCC; ?>'>
+                                    <?php echo $item->TenNCC; ?> 
+                                </option>
+                            <?php
+                        }
+                    ?>
+                </select>
+            </td>
+        </tr>
+    </table>
+    <input type="submit" value="create phanhoi" style="width: 200px; margin-left:180px; margin-top:20px;"/> 
+    <br/><br/>
+    <span id="message"> </span>
+</form>
+
+    

@@ -1,0 +1,71 @@
+<script type="text/javascript">
+    function check()
+    {
+        if (document.getElementById("Username").value  == "")
+        {
+            document.getElementById("message").innerHTML = "<i><b style='color:red'>Nhập Username!</b></i>";
+            return false;
+        }
+
+        if (document.getElementById("Password").value  == "")
+        {
+            document.getElementById("message").innerHTML = "<i><b style='color:red'>Nhập Password!</b></i>";
+            return false;
+        }
+
+        if (document.getElementById("VaiTro").value  == "")
+        {
+            document.getElementById("message").innerHTML = "<i><b style='color:red'>Nhập Vai trò!</b></i>";
+            return false;
+        }
+
+        if (document.getElementById("TrangThai").value  == "")
+        {
+            document.getElementById("message").innerHTML = "<i><b style='color:red'>Nhập trạng thái!</b></i>";
+            return false;
+        }
+
+        return true;
+    }
+</script>
+
+<h1>ĐĂNG KÝ TÀI KHOẢN KHÁCH HÀNG</h1>
+<hr/>
+
+ <form method ="post" onsubmit="return check();">
+ 	<input type="hidden" name="action" value="addaccount" />
+    <table>
+        <tr>
+            <td>Username </td>
+            <td><input id="Username" name="Username" type="text" value="" /></td>
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td><input id="Password" name="Password" type="password" value="" style="width: 275px; height: 30px;"/></td>                   
+        </tr>
+        <tr>
+            <td>Vai trò</td>
+            <td>
+                <select name="vaiTro" class="vaiTro" id="vaiTro">
+                    <option value='NCC'>NCC</option>
+                    <option value='DVVC'>DVVC</option>
+                    <option value='KH'>KH</option>
+                    <option value='Shipper'>Shipper</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Trạng thái</td>
+            <td>
+                <select name="trangThai" class="trangThai" id="trangThai">
+                    <option value='Đang hoạt động'>Đang hoạt động</option>
+                    <option value='Không hoạt động'>Không hoạt động</option>
+                </select>
+            </td>
+        </tr>        
+    </table>
+    <input type="submit" value="addaccount" style="width: 100px;"/> 
+    <br/><br/>
+    <span id="message"> </span>
+</form>
+    

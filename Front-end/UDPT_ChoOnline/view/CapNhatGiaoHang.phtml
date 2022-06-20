@@ -1,0 +1,49 @@
+<h1>CẬP NHẬT ĐƠN HÀNG: <?php echo $order->MaDH; ?></h1>
+<hr/>
+
+ <form method ="POST" onsubmit="return check();">
+ 	<input type="hidden" name="action" value="updateorder" />
+    <table>
+        <tr>
+            <td>Mã đơn hàng </td>
+            <td><input id="maDH" name="maDH" style="color:#808080" type="text" value="<?php echo $order->MaDH; ?>" readonly="readonly"/></td>
+        </tr>
+        <tr>
+            <td>Ngày lập </td>
+            <td><input id="ngayLap" name="ngayLap" style="color:#808080" type="text" value="<?php echo $order->NgayLap; ?>" readonly="readonly"/></td>
+        </tr>
+        <tr>
+            <td>Tổng tiền</td>
+            <td><input id="tongTien" name="tongTien" style="color:#808080" type="text" value="<?php echo $order->TongTien; ?>" readonly="readonly"/></td>                   
+        </tr>
+        <tr>
+            <td>Trạng thái</td>
+            <td>
+                <select name="trangThai" class="trangThai" id="trangThai" >
+                    <option  value='<?php echo  $order->TrangThai; ?>' > <?php echo  $order->TrangThai; ?></option>
+                    <option value='Chờ duyệt'> Chờ duyệt</option>
+                    <option value='Đang đóng gói'> Đang đóng gói</option>
+                    <option value='Đang giao'> Đang giao</option>
+                    <option value='Đã giao'> Đã giao</option>
+                    <option value='Đã hủy'> Đã hủy</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Mã khách hàng</td>
+            <td><input id="maKH" name="maKH" type="text" style="color:#808080" value="<?php  echo $order->MaKH; ?>" readonly="readonly"/></td>
+        </tr>
+        <tr>
+            <td>Hình thức thanh toán</td>
+            <td><input id="hinhThucThanhToan" name="hinhThucThanhToan" style="color:#808080" type="text" value="<?php echo $order->HinhThucThanhToan; ?>" readonly="readonly"/></td>
+        </tr>
+        <tr>
+            <td>Mã nhân viên giao hàng</td>
+            <td><input id="maShipper" name="maShipper" style="color:#808080" type="text" value="<?php echo $order->MaShipper; ?>" readonly="readonly"/></td>
+        </tr> 
+                 
+    </table>
+    <input type="submit" value="Cập nhật" style="width: 200px; margin-left:250px; margin-top:20px;"/> 
+    <br/><br/>
+    <span id="message"> </span>
+</form>

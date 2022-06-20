@@ -1,0 +1,103 @@
+<script type="text/javascript">
+    function check()
+    {
+        if (document.getElementById("TenNCC").value  == "")
+        {
+            document.getElementById("message").innerHTML = "<i><b style='color:red'>Nhập tên nhà cung ứng sản phẩm!</b></i>";
+            return false;
+        }
+
+        if (document.getElementById("GiayPhepKinhDoanh").value  == "")
+        {
+            document.getElementById("message").innerHTML = "<i><b style='color:red'>Nhập số giấy phép kinh doanh!</b></i>";
+            return false;
+        }
+
+        if (document.getElementById("SDT").value  == "")
+        {
+            document.getElementById("message").innerHTML = "<i><b style='color:red'>Nhập SĐT!</b></i>";
+            return false;
+        }
+
+        if (document.getElementById("Email").value  == "")
+        {
+            document.getElementById("message").innerHTML = "<i><b style='color:red'>Nhập Email!</b></i>";
+            return false;
+        }
+
+        if (document.getElementById("SoTaiKhoanNganHang").value  == "")
+        {
+            document.getElementById("message").innerHTML = "<i><b style='color:red'>Nhập số tài khoản ngân hàng!</b></i>";
+            return false;
+        }
+
+        if (document.getElementById("TaiKhoan").value  == "")
+        {
+            document.getElementById("message").innerHTML = "<i><b style='color:red'>Chọn tài khoản Login của bạn!</b></i>";
+            return false;
+        }
+
+        return true;
+    }
+</script>
+
+<h1>CẬP NHẬT NHÀ CUNG ỨNG: <?php echo $supplier->TenNCC; ?></h1>
+<hr/>
+
+ <form method ="POST" onsubmit="return check();">
+ 	<input type="hidden" name="action" value="updatesupplier" />
+    <table>
+        <tr>
+            <td>Mã NCC </td>
+            <td><input id="MaNCC" name="maNCC" type="text" value="<?php echo $supplier->MaNCC; ?>" disabled/></td>
+        </tr>
+        <tr>
+            <td>Tên NCC </td>
+            <td><input id="TenNCC" name="tenNCC" type="text" value="<?php echo $supplier->TenNCC; ?>" /></td>
+        </tr>
+        <tr>
+            <td>Giấy phép kinh doanh</td>
+            <td><input id="GiayPhepKinhDoanh" name="giayPhepKinhDoanh" type="text" value="<?php echo $supplier->GiayPhepKinhDoanh; ?>"/></td>                   
+        </tr>
+        <tr>
+            <td>SĐT</td>
+            <td><input id="SDT" name="sdt" type="text" value="<?php echo $supplier->SDT; ?>"/></td>
+        </tr>
+        <tr>
+            <td>Địa chỉ</td>
+            <td><input id="DiaChi" name="diaChi" type="text" value="<?php  echo $supplier->DiaChi; ?>"/></td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td><input id="Email" name="email" type="text" value="<?php echo $supplier->Email; ?>"/></td>
+        </tr>
+        <tr>
+            <td>Số tài khoản ngân hàng</td>
+            <td><input id="SoTaiKhoanNganHang" name="soTaiKhoanNganHang" type="text" value="<?php echo $supplier->SoTaiKhoanNganHang; ?>" /></td>
+        </tr> 
+        <tr>
+            <td>Tài khoản</td>
+            <td><input id="TaiKhoan" name="taiKhoan" type="text" value="<?php echo $supplier->TaiKhoan; ?>" /></td>
+        </tr>  
+        <tr>
+            <td>Xét duyệt</td>
+            <td>
+                <select name="xetDuyet" class="xetDuyet" id="xetDuyet">
+                    <option value='1'>1</option>
+                    <option value='0'>0</option>
+                </select>
+            </td>
+        </tr>                    
+    </table>
+    <input type="submit" value="updatesupplier" style="width: 200px; margin-left:250px; margin-top:20px;"/> 
+    <br/><br/>
+    <span id="message"> </span>
+</form>
+
+
+<script>
+    window.onload = function(){
+        document.getElementById("xetDuyet").value = <?php echo $supplier->XetDuyet ?>;
+    }
+</script>
+    

@@ -1,0 +1,21 @@
+<h1>TRANG CHỦ</h1>
+<hr/>
+<?php 
+    // echo $data;
+?>
+
+<?php
+
+if (isset ($_SESSION["IsLogined"]) && $_SESSION["IsLogined"] == True)
+{				
+	$username = $_SESSION["UserName"];
+	echo "Logined user: $username <a href='?action=logout'> sign out </a>";
+}
+else
+{
+    echo "<i>Anonymous user</i><br/><br/>";
+    echo "<i> Click vào  <b><a href='?action=login'>đây</a></b> để đăng nhập!</i>";
+
+}
+    
+?>

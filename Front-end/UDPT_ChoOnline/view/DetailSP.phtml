@@ -1,0 +1,33 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+<h3>CHI TIẾT SẢN PHẨM</h3>
+<!-- PHẦN XỬ LÝ -->
+    <?php
+            $p = new SanPham_NCCModel();
+            $p = $data;
+    ?>
+
+<form method="POST">
+    <input type="hidden" name="action" value="addtocart"/>
+<div class="noidungchitiet">
+    <div class = "hinhanh_sp"><img src="<?php echo $p->URL?>" style="width:40%; float:left" >
+    </div>
+    <div class = "detail" style="padding-left: 400px">
+        Tên sản phẩm:<input style = "color: #D17101;border: none;" name="tenSP" value=" <?php echo $p->TenSP?>"/><br/>
+        <br/>
+        Mã sản phẩm:<input style = "color: #D17101;border: none;" name="maSP" value="  <?php echo $p->MaSP?>"/><br/>
+        <br/>
+        ID:<input style = "color: #D17101;border: none;" name="id" value="  <?php echo $p->ID?>"/><br/>
+        <br/>
+        Giá sp:<input style = "color: #D17101;border: none;" name="gia" value="  <?php echo $p->Gia?>"/><br/>
+        <br/>
+        Đơn vị tính:<input style = "color: #D17101;border: none;" name="donViTinh" value="  <?php echo $p->DonViTinh?>"/><br/>
+        <br/>
+        Số lượng:<input style = "color: #D17101" name="soLuong" type="number" value=""/><br/>
+        <br/>
+        <input  style = "color: green;border: none;color: white;text-decoration: none;cursor: pointer;"  type="submit" value="addtocart"/>
+        </a>
+    </div>
+</div>
+</form>

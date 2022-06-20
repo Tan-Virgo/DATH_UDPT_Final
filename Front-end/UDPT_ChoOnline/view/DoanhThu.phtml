@@ -1,0 +1,194 @@
+<?php
+if (!function_exists('currency_format')) {
+    function currency_format($number, $suffix = 'đ') {
+        if (!empty($number)) {
+            return number_format($number, 0, ',', '.') . "{$suffix}";
+        }
+    }
+}
+?>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+<h3>DOANH THU CỦA NHÀ CUNG ỨNG <?php if (isset($supplier)) echo $supplier->TenNCC; ?></h3>
+<form class="form-table">
+
+<div class="form-table">
+    <table class="empty-table">
+        <thead>
+            <tr>
+                <th>Năm</th>
+                <th>Qúy</th>
+                <th>Tháng</th>
+                <th>Mã NCC</th>
+                <th>Tên NCC</th>
+                <th>Doanh thu</th>
+            </tr>
+        </thead>
+        <tbody>
+        <!-- PHẦN XỬ LÝ -->
+        <?php
+            // Tổng số record
+            $total_records = count($data);
+
+            // Tìm limit và current page
+            $limit = 10;
+            $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+
+            //  Tổng pages
+            $total_page = ceil($total_records / $limit);
+
+            // Giới hạn current_page trong khoảng 1 đến total_page
+            if ($current_page > $total_page){
+                $current_page = $total_page;
+            }
+            else if ($current_page < 1){
+                $current_page = 1;
+            }
+
+            // Tìm Start
+            $start = ($current_page - 1) * $limit;
+
+            if ($total_records - $start > 10)
+                $limit = $start + 10;
+            else
+                $limit = $total_records;
+
+            // 
+            $result = array();
+            for ($i = $start; $i < $limit; $i++)
+            {
+                $p = new DoanhThuModel();
+                $p = $data[$i];
+                $result[] = $p;
+            }
+        ?>
+        <!-- PHẦN HIỂN THỊ -->
+        <?php
+            if (count($result) > 0) 
+            {
+                $sn=1;
+                foreach ($result as $item) 
+                {
+                    ?>
+                        <tr>
+                            <td><?php echo $item->Nam; ?></td>
+                            <td><?php echo $item->Quy; ?></td>
+                            <td><?php echo $item->Thang; ?></td>
+                            <td><?php echo $item->MaNCC; ?></td>
+                            <td><?php echo $item->TenNCC; ?></td>
+                            <td><?php echo  currency_format($item->DoanhThu); ?></td>
+                        <tr>
+
+                    <?php
+                }
+            } 
+            else { ?>
+                        <tr>
+                            <td colspan="8">No data found</td>
+                        </tr>
+                    <?php
+                } 
+        ?>
+        </tbody>
+    </table>
+    <br/>
+    <!-- PHẦN PHÂN TRANG -->
+    <div class="paging">
+        <?php 
+            // PHẦN HIỂN THỊ PHÂN TRANG
+            // HIỂN THỊ PHÂN TRANG
+ 
+            echo '<a href="?action=turnover&page=1" style="width:50px; display:inline-block">First</a> | ';
+
+            // nếu current_page > 1 và total_page > 1 mới hiển thị nút prev
+            if ($current_page > 1 && $total_page > 1)
+            {
+                echo '<a href="?action=turnover&page='.($current_page-1).'" style="width:50px; display:inline-block">Prev</a> | ';
+            }
+ 
+            // Lặp khoảng giữa
+            for ($i = 1; $i <= $total_page; $i++)
+            {
+                // Nếu là trang hiện tại thì hiển thị thẻ span
+                // ngược lại hiển thị thẻ a
+                if ($i == $current_page)
+                {
+                    echo '<span style="width:50px; display:inline-block">'.$i.'</span> | ';
+                }
+                else{
+                    echo '<a href="?action=turnover&page='.$i.'" style="width:50px; display:inline-block">'.$i.'</a> | ';
+                }
+            }
+ 
+            // nếu current_page < $total_page và total_page > 1 mới hiển thị nút prev
+            if ($current_page < $total_page && $total_page > 1)
+            {
+                echo '<a href="?action=turnover&page='.($current_page+1).'" style="width:50px; display:inline-block">Next</a> | ';
+            }
+
+            echo '<a href="?action=turnover&page='.($total_page).'" style="width:50px; display:inline-block">Last</a> | ';
+        ?>
+    </div>
+</div>
+</form>
+<br/><br/><br/><br/><hr/><br/><br/>
+<!-- Lấy danh sách thống kê năm hiện tại và năm trước-->
+<?php
+    $date = getdate();
+
+    $dataPoints = array();
+
+    foreach ($datachart as $item)
+    {
+        $title = 'Qúy ' . $item->Quy . ' - Tháng ' . $item->Thang;
+
+        $dataPoints[] = array("label"=> $title, "y"=> $item->DoanhThu);
+    }
+?>
+
+
+<div id="chartContainer" style="height: 370px; width: 800px;"></div>
+<script>
+window.onload = function () {
+    var chart = new CanvasJS.Chart("chartContainer", {
+        animationEnabled: true,
+        theme: "light2",
+        title:{
+            text: "Doanh thu các tháng năm nay"
+        },
+        axisY:{
+            includeZero: true
+        },
+        legend:{
+            cursor: "pointer",
+            verticalAlign: "center",
+            horizontalAlign: "right",
+            itemclick: toggleDataSeries
+        },
+        data: [{
+            type: "column",
+            name: "Tổng doanh thu",
+            indexLabel: "{y}",
+            yValueFormatString: "#0.##",
+            showInLegend: true,
+            dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
+        }]
+    });
+    chart.render();
+
+
+    function toggleDataSeries(e){
+        if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+            e.dataSeries.visible = false;
+        }
+        else{
+            e.dataSeries.visible = true;
+        }
+        chart.render();
+    }
+
+}
+</script>
