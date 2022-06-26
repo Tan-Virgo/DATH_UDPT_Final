@@ -11,4 +11,5 @@ import com.example.Service_DonViVanChuyen.Model.DonViVanChuyen;
 public interface DonViVanChuyenRepository extends JpaRepository<DonViVanChuyen, Integer> {
 	@Query("SELECT * FROM DonViVanChuyen;")
     Optional<DonViVanChuyen> findByMaDVVC(@Param("madvvc") Integer madvvc);
+	 Optional<DonViVanChuyen> findByTaiKhoan(@Param("taikhoan") Integer taikhoan);
 }

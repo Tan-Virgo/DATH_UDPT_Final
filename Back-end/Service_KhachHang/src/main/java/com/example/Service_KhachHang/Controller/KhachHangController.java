@@ -66,4 +66,23 @@ public class KhachHangController {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
+	@GetMapping("/khachhang_taikhoan/{taikhoan}")
+	public ResponseEntity<Optional<KhachHang>> layKHbytk(@PathVariable("taikhoan") Integer taikhoan)
+	{
+		
+		try
+		{	
+			Optional<KhachHang> dvvc = khRepository.findByTaiKhoan(taikhoan);
+			
+			if(dvvc.isEmpty()) 
+				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			
+			return new ResponseEntity<>(dvvc, HttpStatus.OK);
+		}
+		catch (Exception e)
+		{
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 }

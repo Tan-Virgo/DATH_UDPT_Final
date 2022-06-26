@@ -66,6 +66,23 @@ public class NhaCungCapController {
 		}
 	}
 	
+	@GetMapping("/nhacungcap_taikhoan/{taikhoan}")
+	public ResponseEntity<Optional<NhaCungCap>> layDSNhaCungCapByTaiKhoan(@PathVariable("taikhoan") Integer taikhoan)
+	{
+		try
+		{
+			Optional<NhaCungCap> nccData = nhaCungCapRepository.findByTaiKhoan(taikhoan);
+			if(nccData.isEmpty()) 
+				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			
+			return new ResponseEntity<>(nccData, HttpStatus.OK);
+		}
+		catch (Exception e)
+		{
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
 	@PostMapping("/nhacungcap")
 	public ResponseEntity<NhaCungCap> themNhaCungCap(@RequestBody NhaCungCap ncc)
 	{

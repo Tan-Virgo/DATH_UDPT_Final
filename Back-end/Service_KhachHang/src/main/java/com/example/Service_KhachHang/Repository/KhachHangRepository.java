@@ -11,4 +11,5 @@ import com.example.Service_KhachHang.Model.KhachHang;
 public interface KhachHangRepository extends JpaRepository<KhachHang, Integer> {
 	@Query("SELECT * FROM KhachHang;")
     Optional<KhachHang> findByMaKH(@Param("makh") Integer makh);
+	Optional<KhachHang> findByTaiKhoan(@Param("taikhoan") Integer taikhoan);
 }

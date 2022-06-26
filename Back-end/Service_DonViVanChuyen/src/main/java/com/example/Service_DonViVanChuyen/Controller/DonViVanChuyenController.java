@@ -68,6 +68,26 @@ public class DonViVanChuyenController {
 		}
 	}
 	
+	
+	@GetMapping("/donvivanchuyen_taikhoan/{taikhoan}")
+	public ResponseEntity<Optional<DonViVanChuyen>> layDonViVanChuyenByTaiKhoan(@PathVariable("taikhoan") Integer taikhoan)
+	{
+		
+		try
+		{	
+			Optional<DonViVanChuyen> dvvc = donViVanChuyenRepository.findByTaiKhoan(taikhoan);
+			
+			if(dvvc.isEmpty()) 
+				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			
+			return new ResponseEntity<>(dvvc, HttpStatus.OK);
+		}
+		catch (Exception e)
+		{
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
 	@PostMapping("/donvivanchuyen")
 	public ResponseEntity<DonViVanChuyen> themDonViVanChuyen(@RequestBody DonViVanChuyen dvvc)
 	{

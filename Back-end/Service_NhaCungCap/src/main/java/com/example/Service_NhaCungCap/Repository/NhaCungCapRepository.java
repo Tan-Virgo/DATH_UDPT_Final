@@ -11,4 +11,5 @@ import com.example.Service_NhaCungCap.Model.NhaCungCap;
 public interface NhaCungCapRepository extends JpaRepository<NhaCungCap, Integer> {
 	@Query("SELECT * FROM NhaCungCap;")
     Optional<NhaCungCap> findByMaNCC(@Param("mancc") Integer mancc);
+	Optional<NhaCungCap> findByTaiKhoan(@Param("taikhoan") Integer taikhoan);
 }
