@@ -253,8 +253,12 @@ switch ($action)
 
 
     case "login":
+        $controller = new TaiKhoanController();
+        $controller->login();
         break;
     case "logout":
+        $controller = new TaiKhoanController();
+        $controller->logout();
         break;
     default:
         $controller = new HomeController();

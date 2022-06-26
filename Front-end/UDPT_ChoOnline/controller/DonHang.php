@@ -124,8 +124,9 @@ class DonHangController
 
     public function listdonhang()
     {
-        $makh = KhachHangModel::findonecustomer(1);
-        $data = DonHangModel::listdonhang($makh->MaKH);
+        $taikhoan = TaiKhoanModel::getaccountbyusername($_SESSION["UserName"]);
+        $kh = KhachHangModel::findonecustomerbytaikhoan($taikhoan->ID);
+        $data = DonHangModel::listdonhang($kh->MaKH);
         $VIEW = "./view/DSDonhang.phtml";
         require("./template/template.phtml");
     }

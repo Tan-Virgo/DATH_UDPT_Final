@@ -87,6 +87,31 @@ require_once("./Model/CallAPI.php");
             return $dvvc;
         }
 
+        public static function findonetransportbytaikhoan($tk)
+        {
+            $url = "http://localhost:8053/api/donvivanchuyen_taikhoan/" . $tk;
+
+            $get_data = callAPI('GET', $url, false);
+            $response = json_decode($get_data, true);
+            
+            $dvvc = new DonViVanChuyenModel();
+            if ($response) 
+            {              
+                $dvvc->MaDVVC = $response["maDVVC"];
+                $dvvc->TenDVVC = $response["tenDVVC"];
+                $dvvc->GiayPhepKinhDoanh = $response["giayPhepKinhDoanh"];
+                $dvvc->SDT = $response["sdt"];
+                $dvvc->DiaChi = $response["diaChi"];
+                $dvvc->Email = $response["email"];
+                $dvvc->SoTaiKhoanNganHang = $response["soTaiKhoanNganHang"];
+                $dvvc->PhiVanChuyen_KM = $response["phiVanChuyen_KM"];
+                $dvvc->TaiKhoan = $response["taiKhoan"];
+                $dvvc->XetDuyet = $response["xetDuyet"];
+            }
+
+            return $dvvc;
+        }
+
         public static function addtransport($transport)
         {
             $url = "http://localhost:8053/api/donvivanchuyen";

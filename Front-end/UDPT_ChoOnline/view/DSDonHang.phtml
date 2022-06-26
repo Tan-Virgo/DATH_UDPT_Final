@@ -1,4 +1,18 @@
 <?php
+	if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
+?>
+<?php
+	if (!isset ($_SESSION["IsLogined"]) || $_SESSION["IsLogined"] != true || (isset ($_SESSION["VaiTro"]) && $_SESSION["VaiTro"] != "KH"))
+	{
+		die ("You are not permitted for using this page !!! Click <a href='?action=login'>here </a> to goto login page ! ");
+	}
+	$username = $_SESSION["UserName"];
+?>
+
+<?php
 if (!function_exists('currency_format')) {
     function currency_format($number, $suffix = 'đ') {
         if (!empty($number)) {
@@ -8,7 +22,7 @@ if (!function_exists('currency_format')) {
 }
 ?>
 
-<h3>DANH SÁCH ĐƠN HÀNG CỦA KHÁCH HÀNG "<?php echo $makh->TenKH; ?>"</h3>
+<h3>DANH SÁCH ĐƠN HÀNG CỦA KHÁCH HÀNG "<?php echo $kh->TenKH; ?>"</h3>
 <form class="form-table" method="post">
 <input type="hidden" name="action" value="deleteAllTransportCheckedBox" />
 <div class="form-table">

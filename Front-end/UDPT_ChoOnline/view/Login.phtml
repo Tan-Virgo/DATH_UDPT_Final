@@ -7,13 +7,13 @@
         <tr>
             <td>Username</td>
             <td>
-                <input name="UserName" type="text" value=""/>
+                <input name="username" type="text" value=""/>
             </td>
         </tr>
         <tr>
             <td>Password</td>
             <td>
-                <input style="width:275px; height:30px" name="Password" type="password" value=""/>
+                <input style="width:275px; height:30px" name="password" type="password" value=""/>
             </td>                   
         </tr>
     </table>
@@ -21,10 +21,26 @@
     <?php
 
 
+        // if (isset ($_SESSION["IsLogined"]) && $_SESSION["IsLogined"] == True)
+        // {			
+        //     if (isset($_SESSION["name"]))	
+        //     {
+        //         $name = $_SESSION["name"];
+        //         echo "Logined user: $name <a href=\"?action=logout\"> sign out </a>";
+        //     }
+        // }
+
+
+
         if (isset ($_SESSION["IsLogined"]) && $_SESSION["IsLogined"] == True)
         {				
-            $name = $_SESSION["name"];
-            echo "Logined user: $name <a href=\"?action=logout\"> sign out </a>";
+            $username = $_SESSION["UserName"];
+            echo "<br/><br/>Logined user: \"" . $username ."\" ===> <a href='?action=logout'> sign out </a>";
+        }
+        else
+        {
+            echo "<br/><br/><i>Anonymous user</i><br/><br/>";
+
         }
     ?>
 </form>

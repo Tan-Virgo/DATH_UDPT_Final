@@ -1,4 +1,20 @@
 <?php
+	if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
+?>
+<?php
+	if (!isset ($_SESSION["IsLogined"]) || $_SESSION["IsLogined"] != true || (isset ($_SESSION["VaiTro"]) && $_SESSION["VaiTro"] != "NCC"))
+	{
+		die ("You are not permitted for using this page !!! Click <a href='?action=login'>here </a> to goto login page ! ");
+	}
+	$username = $_SESSION["UserName"];
+?>
+
+
+
+<?php
 if (!function_exists('currency_format')) {
     function currency_format($number, $suffix = 'đ') {
         if (!empty($number)) {

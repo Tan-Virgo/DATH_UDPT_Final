@@ -85,6 +85,23 @@ require_once("./Model/CallAPI.php");
             return $tk;
         }
 
+        public static function login($name, $password)
+        {
+            $acc_login = TaiKhoanModel::getaccountbyusername($name);
+
+            if (isset($acc_login))
+            {
+                if ($acc_login->Password === $password)
+                {
+                    return $acc_login;
+                }
+            }
+            else
+            {
+                return null;
+            }   
+        }
+
     }
 
 ?>

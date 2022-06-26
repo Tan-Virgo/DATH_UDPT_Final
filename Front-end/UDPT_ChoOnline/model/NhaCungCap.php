@@ -106,6 +106,32 @@ require_once("./Model/CallAPI.php");
         }
 
 
+        public static function findonesupplierbytaikhoan($tk)
+        {
+            $url = "http://localhost:8053/api/nhacungcap_taikhoan/" . $tk;
+            
+            $get_data = callAPI('GET', $url, false);
+            $response = json_decode($get_data, true);
+            
+            $ncc = new NhaCungCapModel();
+            
+            if ($response) 
+            {            
+                $ncc->MaNCC = $response["maNCC"];
+                $ncc->TenNCC = $response["tenNCC"];
+                $ncc->GiayPhepKinhDoanh = $response["giayPhepKinhDoanh"];
+                $ncc->SDT = $response["sdt"];
+                $ncc->DiaChi = $response["diaChi"];
+                $ncc->Email = $response["email"];
+                $ncc->SoTaiKhoanNganHang = $response["soTaiKhoanNganHang"];
+                $ncc->TaiKhoan = $response["taiKhoan"];
+                $ncc->XetDuyet = $response["xetDuyet"];
+            }
+
+            return $ncc;
+        }
+
+
         public static function updatesupplier($supplier)
         {
             $url = "http://localhost:8053/api/nhacungcap/" . $supplier->MaNCC;

@@ -1,7 +1,21 @@
+<?php
+	if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
+?>
+<?php
+	if (!isset ($_SESSION["IsLogined"]) || $_SESSION["IsLogined"] != true || (isset ($_SESSION["VaiTro"]) && $_SESSION["VaiTro"] != "KH"))
+	{
+		die ("You are not permitted for using this page !!! Click <a href='?action=login'>here </a> to goto login page ! ");
+	}
+	$username = $_SESSION["UserName"];
+?>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
-<h3>LỊCH SỬ MUA HÀNG</h3>
+<h3>LỊCH SỬ MUA HÀNG CỦA KHÁCH HÀNG : " <?php echo $kh->TenKH; ?> "</h3>
 <form class="form-table">
 
 <div class="form-table">

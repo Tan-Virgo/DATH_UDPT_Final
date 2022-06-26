@@ -34,9 +34,9 @@ require_once("./Model/CallAPI.php");
             $this->TongTien = "";
         }
 
-        public static function purchasinghistory()
+        public static function purchasinghistory($makh)
         {
-            $url = "http://localhost:8053/api/lichsumuahang";
+            $url = "http://localhost:8053/api/lichsumuahang/" . $makh;
 
             $get_data = callAPI('GET', $url, false);
             $response = json_decode($get_data, true);

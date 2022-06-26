@@ -5,7 +5,9 @@ class DoanhThuController
 
     public function turnover()
     {
-        $supplier = NhaCungCapModel::findonesupplier(1);
+        $taikhoan = TaiKhoanModel::getaccountbyusername($_SESSION["UserName"]);
+        $ncc = NhaCungCapModel::findonesupplierbytaikhoan($taikhoan->ID);
+        $supplier = NhaCungCapModel::findonesupplier($ncc->MaNCC);
         $data = DoanhThuModel::getturnover(1);
         $datachart = DoanhThuModel::getturnoverpresent(1);
         $VIEW = "./view/DoanhThu.phtml";

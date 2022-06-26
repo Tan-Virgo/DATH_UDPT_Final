@@ -54,6 +54,30 @@ require_once("./Model/CallAPI.php");
             return $kh;
         }
 
+        public static function findonecustomerbytaikhoan($tk)
+        {
+            $url = "http://localhost:8053/api/khachhang_taikhoan/" . $tk;
+
+            $get_data = callAPI('GET', $url, false);
+            $response = json_decode($get_data, true);
+            
+            $kh = new KhachHangModel();
+            if ($response) 
+            {              
+                $kh->MaKH = $response["maKH"];
+                $kh->TenKH = $response["tenKH"];
+                $kh->NgaySinh = $response["ngaySinh"];
+                $kh->SDT = $response["sdt"];
+                $kh->DiaChi = $response["diaChi"];
+                $kh->Email = $response["email"];
+                $kh->CMND = $response["cmnd"];
+                $kh->MaLoaiKH = $response["maLoaiKH"];
+                $kh->TaiKhoan = $response["taiKhoan"];
+            }
+
+            return $kh;
+        }
+
 
     }
 

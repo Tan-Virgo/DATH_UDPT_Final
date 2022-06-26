@@ -1,3 +1,16 @@
+<?php
+	if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
+?>
+<?php
+	if (!isset ($_SESSION["IsLogined"]) || $_SESSION["IsLogined"] != true || (isset ($_SESSION["VaiTro"]) && $_SESSION["VaiTro"] != "NCC"))
+	{
+		die ("You are not permitted for using this page !!! Click <a href='?action=login'>here </a> to goto login page ! ");
+	}
+	$username = $_SESSION["UserName"];
+?>
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
